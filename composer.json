@@ -11,7 +11,7 @@
     "require": {},
     "autoload": {
         "psr-4": {
-            "JDT\\EmailTemplates\\": "src/"
+            "JDT\\LaravelEmailTemplates\\": "src/"
         }
     }
 }

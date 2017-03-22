@@ -1,5 +1,5 @@
 <?php
-namespace JDT\EmailTemplates\Facades;
+namespace JDT\LaravelEmailTemplates\Facades;
 
 use Illuminate\Support\Facades\Facade;
 
