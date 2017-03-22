@@ -1,0 +1,17 @@
+{
+    "name": "jbraud/laravel-email-templates",
+    "description": "Laravel 5 database driven email templating",
+    "type": "library",
+    "authors": [
+        {
+            "name": "Jon Braud",
+            "email": "jon@braud.co.uk"
+        }
+    ],
+    "require": {},
+    "autoload": {
+        "psr-4": {
+            "JDT\\EmailTemplates\\": "src/"
+        }
+    },
+}
