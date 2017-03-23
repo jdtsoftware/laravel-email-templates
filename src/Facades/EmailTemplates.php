@@ -3,6 +3,10 @@ namespace JDT\LaravelEmailTemplates\Facades;
 
 use Illuminate\Support\Facades\Facade;
 
+/**
+ * Class EmailTemplates
+ * @package JDT\LaravelEmailTemplates\Facades
+ */
 class EmailTemplates extends Facade
 {
     /**
@@ -10,7 +14,7 @@ class EmailTemplates extends Facade
      *
      * @return string
      */
-    protected static function getFacadeAccessor()
+    protected static function getFacadeAccessor() : string
     {
         return 'laravel-email-templates';
     }
