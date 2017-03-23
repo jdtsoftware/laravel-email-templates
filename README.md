@@ -48,8 +48,35 @@ The package is built in such a way that it plays nicely with the existing Larave
 Given a template existing in the above table with the handle 'registration', email can be sent simply as below:
 
 ```php
-$mail = \EmailTemplate::fetch('registration')
-    ->with(['name' => 'Jon']);
-    
+$mail = \EmailTemplate::fetch('registration', ['name' => 'Jon']);
+ 
+\Mail::to('foo@bar.com', $mail);
+```
+
+You can of course pass the language to translate the chosen email, providing you have created an email for that
+handle/language combination.
+
+```php
+$mail = \EmailTemplate::fetch('registration', ['name' => 'Jon'], 'es');
+ 
+\Mail::to('foo@bar.com', $mail);
+```
+
+This package doesn't rely on a templating engine such as Blade or Twig to handle any 
+of the email messages, but does provide it's own view class adhering to Laravel contracts.
+
+This means that you can pass data to the email just as you would any other view, without 
+having to worry about the choice of templating package you use elsewhere in your project.
+
+```php
+$mail = \EmailTemplate::fetch('registration', ['first_name' => 'Jon']);
+ 
+$mail->with('last_name', 'Braud');
+ 
+$mail->with([
+    'verify_url'=> 'https:/....',
+    'signup_time' => \Carbon\Carbon::now()->toDateTimeString()
+]);
+ 
 \Mail::to('foo@bar.com', $mail);
 ```
