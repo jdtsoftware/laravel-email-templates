@@ -6,6 +6,7 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 use JDT\LaravelEmailTemplates\Entities\EmailTemplate;
+use JDT\LaravelEmailTemplates\Helpers\Bindings;
 
 /**
  * Class TemplateMailable
@@ -39,5 +40,25 @@ class TemplateMailable extends Mailable
     {
         $this->view = ['html' => new StringView($this->email->content, $this->viewData)];
         return $this->view;
+    }
+
+    /**
+     * Apply the view data to the subject of the email.
+     *
+     * @param \Illuminate\Mail\Message $message
+     * @return $this
+     */
+    protected function buildSubject($message)
+    {
+        $bindings = Bindings::normaliseKeys($this->viewData);
+
+        $bound = str_replace(
+            array_keys($bindings),
+            array_values($bindings),
+            $this->email->subject
+        );
+
+        $message->subject($bound);
+        return $this;
     }
 }

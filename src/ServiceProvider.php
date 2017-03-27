@@ -49,7 +49,8 @@ class ServiceProvider extends LaravelServiceProvider
         ]);
 
         $this->mergeConfigFrom(
-            __DIR__ . '/../config/laravel-email-templates.php', 'laravel-email-templates'
+            __DIR__ . '/../config/laravel-email-templates.php',
+            'laravel-email-templates'
         );
     }
 

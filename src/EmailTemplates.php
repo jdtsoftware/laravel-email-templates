@@ -21,13 +21,14 @@ class EmailTemplates
     }
 
     /**
-     * @param $template
+     * @param string $template
      * @param array $data
-     * @param string $language
-     * @return TemplateMailable|null
+     * @param string|null $language
+     * @param null $ownerId
+     * @return TemplateMailable
      * @throws \Exception
      */
-    public function fetch(string $template, array $data = [], string $language = null) : TemplateMailable
+    public function fetch(string $template, array $data = [], string $language = null, $ownerId = null):TemplateMailable
     {
         # If a language wasn't passed then we check if we have a default
         # language to fall back to.  If we have neither, don't continue.
@@ -44,7 +45,8 @@ class EmailTemplates
         $entity = $this->repository->findByHandle(
             $template,
             $language,
-            config('laravel-email-templates.defaultLanguageFallback')
+            config('laravel-email-templates.defaultLanguageFallback'),
+            $ownerId
         );
 
         if (empty($entity)) {

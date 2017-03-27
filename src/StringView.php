@@ -3,6 +3,7 @@ namespace JDT\LaravelEmailTemplates;
 
 use Illuminate\Contracts\Support\Htmlable;
 use Illuminate\Contracts\View\View;
+use JDT\LaravelEmailTemplates\Helpers\Bindings;
 
 /**
  * Class StringView
@@ -48,30 +49,13 @@ class StringView implements Htmlable, View
      */
     public function render() : string
     {
+        $treated = Bindings::normaliseKeys($this->data);
+
         return str_replace(
-            $this->normaliseDataKeys($this->data),
-            array_values($this->data),
+            array_keys($treated),
+            array_values($treated),
             $this->content
         );
-    }
-
-    /**
-     * @param array $data
-     * @return array
-     */
-    protected function normaliseDataKeys(array $data = []) : array
-    {
-        $result = [];
-
-        foreach ($data as $key => $val) {
-            if (!preg_match('/\{\{\$.+\}\}/', $key)) {
-                $key = "{{" . trim($key) . "}}";
-            }
-
-            $result[] = $key;
-        }
-
-        return $result;
     }
 
     /**
