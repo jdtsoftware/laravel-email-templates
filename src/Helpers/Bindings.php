@@ -3,8 +3,7 @@
 namespace JDT\LaravelEmailTemplates\Helpers;
 
 /**
- * Class Bindings
- * @package JDT\LaravelEmailTemplates\Helpers
+ * Class Bindings.
  */
 class Bindings
 {
@@ -12,7 +11,7 @@ class Bindings
      * Treat template variables passed in to wrap replacement keys in the configured
      * anchors, ready to be replaced with the placeholder bindings in the content.
      * E.g.
-     *     first_name => {{first_name}} (default anchors)
+     *     first_name => {{first_name}} (default anchors).
      *
      * @param $data
      * @return array
@@ -28,9 +27,8 @@ class Bindings
 
             if (($ret = preg_match($pattern, $key)) === false) {
                 throw new \RuntimeException("Invalid pattern '{$pattern} with current email anchor configuration");
-
             } elseif ($ret === 0) {
-                $key = "{{" . trim($key) . "}}";
+                $key = '{{' . trim($key) . '}}';
             }
 
             $result[$key] = $val;

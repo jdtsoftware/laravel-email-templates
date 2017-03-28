@@ -1,11 +1,11 @@
 <?php
+
 namespace JDT\LaravelEmailTemplates\Entities;
 
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * Class EmailTemplate
- * @package JDT\LaravelEmailTemplates\Entities
+ * Class EmailTemplate.
  */
 class EmailTemplate extends Model
 {
@@ -25,6 +25,6 @@ class EmailTemplate extends Model
         'handle',
         'subject',
         'content',
-        'language'
+        'language',
     ];
 }

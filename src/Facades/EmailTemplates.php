@@ -1,11 +1,11 @@
 <?php
+
 namespace JDT\LaravelEmailTemplates\Facades;
 
 use Illuminate\Support\Facades\Facade;
 
 /**
- * Class EmailTemplates
- * @package JDT\LaravelEmailTemplates\Facades
+ * Class EmailTemplates.
  */
 class EmailTemplates extends Facade
 {
