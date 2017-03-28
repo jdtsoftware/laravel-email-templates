@@ -1,3 +1,5 @@
+[![StyleCI](https://styleci.io/repos/85436471/shield)](https://styleci.io/repos/85436471)
+
 # Laravel Email Templates
 
 Database driven email templates for >= Laravel 5.4 and PHP 7.
