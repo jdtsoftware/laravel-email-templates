@@ -1,9 +1,9 @@
 <?php
+
 namespace JDT\LaravelEmailTemplates;
 
 /**
- * Class EmailTemplates
- * @package JDT\LaravelEmailTemplates
+ * Class EmailTemplates.
  */
 class EmailTemplates
 {
@@ -30,14 +30,14 @@ class EmailTemplates
      */
     public function fetch(string $template, array $data = [], string $language = null, $ownerId = null):TemplateMailable
     {
-        # If a language wasn't passed then we check if we have a default
-        # language to fall back to.  If we have neither, don't continue.
+        // If a language wasn't passed then we check if we have a default
+        // language to fall back to.  If we have neither, don't continue.
         if (empty($language)) {
             $language = config('laravel-email-templates.defaultLanguage');
 
             if (empty($language)) {
                 throw new \Exception(
-                    "No language passed to fetch().  Either pass a language or set the defaultLanguage config item."
+                    'No language passed to fetch().  Either pass a language or set the defaultLanguage config item.'
                 );
             }
         }
