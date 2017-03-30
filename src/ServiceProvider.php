@@ -25,6 +25,7 @@ class ServiceProvider extends LaravelServiceProvider
     {
         $this->registerViews();
         $this->registerConfig();
+        $this->registerMigrations();
     }
 
     /**
@@ -52,6 +53,14 @@ class ServiceProvider extends LaravelServiceProvider
             __DIR__ . '/../config/laravel-email-templates.php',
             'laravel-email-templates'
         );
+    }
+
+    /**
+     * Register migrations.
+     */
+    public function registerMigrations()
+    {
+        $this->loadMigrationsFrom(__DIR__.'/../migrations');
     }
 
     /**

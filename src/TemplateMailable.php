@@ -38,7 +38,7 @@ class TemplateMailable extends Mailable
      */
     public function build() : array
     {
-        $this->view = ['html' => new StringView($this->email->content, $this->viewData)];
+        $this->view = ['html' => new StringView($this->email, $this->viewData)];
         return $this->view;
     }
 

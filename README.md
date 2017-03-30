@@ -22,24 +22,12 @@ Then, in the same file, add the facade to the aliases config:
 ]
 ```
 
-Next, set up the database table that'll hold all of our email templates:
+Next, run the migrations:
 
-```sql
-CREATE TABLE `email_template` (
-  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
-  `owner_id` int(11) unsigned DEFAULT NULL,
-  `handle` varchar(128) NOT NULL,
-  `subject` varchar(128) NOT NULL,
-  `content` text NOT NULL,
-  `language` varchar(4) NOT NULL DEFAULT 'en',
-  `created_at` datetime DEFAULT CURRENT_TIMESTAMP,
-  `updated_at` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  `deleted_at` datetime DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `handle` (`handle`),
-  KEY `language` (`language`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 ```
+$ php artisan migrate
+```
+This will set up 2 tables; email_template and email_layout.
 
 ## Usage
 

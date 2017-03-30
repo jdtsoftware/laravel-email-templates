@@ -3,6 +3,7 @@ namespace JDT\LaravelEmailTemplates;
 
 use Illuminate\Contracts\Support\Htmlable;
 use Illuminate\Contracts\View\View;
+use JDT\LaravelEmailTemplates\Entities\EmailTemplate;
 use JDT\LaravelEmailTemplates\Helpers\Bindings;
 
 /**
@@ -14,7 +15,7 @@ class StringView implements Htmlable, View
     /**
      * @var string
      */
-    protected $content;
+    protected $email;
 
     /**
      * @var string
@@ -23,12 +24,12 @@ class StringView implements Htmlable, View
 
     /**
      * StringView constructor.
-     * @param string $content
+     * @param EmailTemplate $email
      * @param array $data
      */
-    public function __construct($content, array $data = [])
+    public function __construct(EmailTemplate $email, array $data = [])
     {
-        $this->content = $content;
+        $this->email = $email;
         $this->data = $data;
     }
 
@@ -51,11 +52,14 @@ class StringView implements Htmlable, View
     {
         $treated = Bindings::normaliseKeys($this->data);
 
-        return str_replace(
+        $bound = str_replace(
             array_keys($treated),
             array_values($treated),
-            $this->content
+            $this->email->content
         );
+
+        $emailLayout = $this->email->layout;
+        return (!empty($emailLayout) ? str_replace('{{content}}', $bound, $emailLayout->layout) : $bound);
     }
 
     /**
