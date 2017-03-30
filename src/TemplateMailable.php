@@ -38,6 +38,7 @@ class TemplateMailable extends Mailable
     public function build() : array
     {
         $this->view = ['html' => new StringView($this->email, $this->viewData)];
+
         return $this->view;
     }
 

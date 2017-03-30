@@ -1,11 +1,12 @@
 <?php
+
 namespace JDT\LaravelEmailTemplates\Entities;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
- * Class EmailLayout
+ * Class EmailLayout.
  */
 class EmailLayout extends Model
 {
@@ -24,6 +25,6 @@ class EmailLayout extends Model
      * @var array
      */
     protected $fillable = [
-        'layout'
+        'layout',
     ];
 }
