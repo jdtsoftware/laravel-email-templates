@@ -1,11 +1,11 @@
 <?php
+
 namespace JDT\LaravelEmailTemplates;
 
 use JDT\LaravelEmailTemplates\Entities\EmailTemplate;
 
 /**
- * Class EmailTemplateRepository
- * @package JDT\LaravelEmailTemplates
+ * Class EmailTemplateRepository.
  */
 class EmailTemplateRepository
 {

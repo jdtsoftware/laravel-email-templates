@@ -1,14 +1,14 @@
 <?php
+
 namespace JDT\LaravelEmailTemplates;
 
-use Illuminate\Contracts\Support\Htmlable;
 use Illuminate\Contracts\View\View;
 use JDT\LaravelEmailTemplates\Entities\EmailTemplate;
+use Illuminate\Contracts\Support\Htmlable;
 use JDT\LaravelEmailTemplates\Helpers\Bindings;
 
 /**
- * Class StringView
- * @package JDT\LaravelEmailTemplates
+ * Class StringView.
  */
 class StringView implements Htmlable, View
 {

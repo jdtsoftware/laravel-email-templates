@@ -1,12 +1,12 @@
 <?php
+
 namespace JDT\LaravelEmailTemplates\Entities;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
- * Class EmailTemplate
- * @package JDT\LaravelEmailTemplates\Entities
+ * Class EmailTemplate.
  */
 class EmailTemplate extends Model
 {
@@ -28,7 +28,7 @@ class EmailTemplate extends Model
         'handle',
         'subject',
         'content',
-        'language'
+        'language',
     ];
 
     /**

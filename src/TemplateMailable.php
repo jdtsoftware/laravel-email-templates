@@ -5,12 +5,11 @@ namespace JDT\LaravelEmailTemplates;
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
-use JDT\LaravelEmailTemplates\Entities\EmailTemplate;
 use JDT\LaravelEmailTemplates\Helpers\Bindings;
+use JDT\LaravelEmailTemplates\Entities\EmailTemplate;
 
 /**
- * Class TemplateMailable
- * @package JDT\LaravelEmailTemplates
+ * Class TemplateMailable.
  */
 class TemplateMailable extends Mailable
 {
@@ -59,6 +58,7 @@ class TemplateMailable extends Mailable
         );
 
         $message->subject($bound);
+
         return $this;
     }
 }

@@ -1,11 +1,11 @@
 <?php
+
 namespace JDT\LaravelEmailTemplates;
 
 use Illuminate\Support\ServiceProvider as LaravelServiceProvider;
 
 /**
- * Class ServiceProvider
- * @package JDT\LaravelEmailTemplates
+ * Class ServiceProvider.
  */
 class ServiceProvider extends LaravelServiceProvider
 {
