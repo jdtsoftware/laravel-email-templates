@@ -60,7 +60,7 @@ class ServiceProvider extends LaravelServiceProvider
      */
     public function registerMigrations()
     {
-        $this->loadMigrationsFrom(__DIR__.'/../migrations');
+        $this->loadMigrationsFrom(__DIR__ . '/../migrations');
     }
 
     /**
