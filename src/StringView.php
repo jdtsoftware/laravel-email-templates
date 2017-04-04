@@ -3,9 +3,9 @@
 namespace JDT\LaravelEmailTemplates;
 
 use Illuminate\Contracts\View\View;
-use JDT\LaravelEmailTemplates\Entities\EmailTemplate;
 use Illuminate\Contracts\Support\Htmlable;
 use JDT\LaravelEmailTemplates\Helpers\Bindings;
+use JDT\LaravelEmailTemplates\Entities\EmailTemplate;
 
 /**
  * Class StringView.
@@ -59,7 +59,8 @@ class StringView implements Htmlable, View
         );
 
         $emailLayout = $this->email->layout;
-        return (!empty($emailLayout) ? str_replace('{{content}}', $bound, $emailLayout->layout) : $bound);
+
+        return !empty($emailLayout) ? str_replace('{{content}}', $bound, $emailLayout->layout) : $bound;
     }
 
     /**
