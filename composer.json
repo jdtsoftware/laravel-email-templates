@@ -1,5 +1,5 @@
 {
-    "name": "jbraud/laravel-email-templates",
+    "name": "jdtsoftware/laravel-email-templates",
     "description": "Laravel 5 database driven email templating",
     "type": "library",
     "authors": [
