@@ -8,7 +8,11 @@
             "email": "jon@jdtsoftware.co.uk"
         }
     ],
-    "require": {},
+    "require": {
+        "illuminate/contracts": "^5.4",
+        "illuminate/database": "^5.4",
+        "illuminate/mail": "^5.4.17"
+    },
     "autoload": {
         "psr-4": {
             "JDT\\LaravelEmailTemplates\\": "src/"
