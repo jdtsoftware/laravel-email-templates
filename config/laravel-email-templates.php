@@ -14,4 +14,13 @@ return [
         'open' => '{{',
         'close' => '}}',
     ],
+
+    // Whether to cache email templates
+    'cache' => true,
+
+    // Duration in minutes
+    'cacheDuration' => 60,
+
+    // Format for cache keys, replaced items are: handle, language, ownerId
+    'cacheKeyFormat' => 'email_template_%s_%s_%d',
 ];

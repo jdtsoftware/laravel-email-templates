@@ -4,6 +4,7 @@ namespace JDT\LaravelEmailTemplates;
 
 use Illuminate\Contracts\View\View;
 use Illuminate\Contracts\Support\Htmlable;
+use JDT\LaravelEmailTemplates\Helpers\CSS;
 use JDT\LaravelEmailTemplates\Helpers\Bindings;
 use JDT\LaravelEmailTemplates\Entities\EmailTemplate;
 
@@ -23,23 +24,48 @@ class StringView implements Htmlable, View
     protected $data;
 
     /**
+     * @var string
+     */
+    protected $stylesheet;
+
+    /**
+     * @var string
+     */
+    protected $html;
+
+    /**
      * StringView constructor.
      * @param EmailTemplate $email
      * @param array $data
+     * @param string|null $stylesheet
      */
-    public function __construct(EmailTemplate $email, array $data = [])
+    public function __construct(EmailTemplate $email, array $data = [], string $stylesheet = null, $html = false)
     {
         $this->email = $email;
         $this->data = $data;
+        $this->stylesheet = $stylesheet;
+        $this->html = $html;
     }
 
     /**
-     * Get content as a string of HTML.
+     * Get content as a string of HTML.  Falls back to text if HTML not requested.
      *
      * @return string
      */
     public function toHtml() : string
     {
+        if ($this->html) {
+            $emailLayout = $this->email->layout;
+
+            if (!empty($emailLayout) && !empty($this->stylesheet)) {
+                $emailLayout->layout = CSS::transform($emailLayout->layout, $this->stylesheet);
+            }
+
+            return !empty($emailLayout)
+                ? str_replace('{{content}}', $this->render(), $emailLayout->layout)
+                : $this->render();
+        }
+
         return $this->render();
     }
 
@@ -58,9 +84,7 @@ class StringView implements Htmlable, View
             $this->email->content
         );
 
-        $emailLayout = $this->email->layout;
-
-        return !empty($emailLayout) ? str_replace('{{content}}', $bound, $emailLayout->layout) : $bound;
+        return $bound;
     }
 
     /**

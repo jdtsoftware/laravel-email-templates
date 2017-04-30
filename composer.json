@@ -11,7 +11,8 @@
     "require": {
         "illuminate/contracts": "^5.4",
         "illuminate/database": "^5.4",
-        "illuminate/mail": "^5.4.17"
+        "illuminate/mail": "^5.4.17",
+        "tijsverkoyen/css-to-inline-styles": "^2.2"
     },
     "autoload": {
         "psr-4": {
