@@ -56,14 +56,21 @@ class StringView implements Htmlable, View
     {
         if ($this->html) {
             $emailLayout = $this->email->layout;
+            $layout = '';
 
-            if (!empty($emailLayout) && !empty($this->stylesheet)) {
-                $emailLayout->layout = CSS::transform($emailLayout->layout, $this->stylesheet);
+            if (!empty($emailLayout)) {
+                $layout = $emailLayout->getOriginal()['layout'];
             }
 
-            return !empty($emailLayout)
-                ? str_replace('{{content}}', $this->render(), $emailLayout->layout)
+            $content = !empty($layout)
+                ? str_replace('{{content}}', $this->render(), $layout)
                 : $this->render();
+
+            if (!empty($this->stylesheet)) {
+                return CSS::transform($this->translateBindings($content), $this->stylesheet);
+            }
+
+            return $this->translateBindings($content);
         }
 
         return $this->render();
@@ -76,15 +83,7 @@ class StringView implements Htmlable, View
      */
     public function render() : string
     {
-        $treated = Bindings::normaliseKeys($this->data);
-
-        $bound = str_replace(
-            array_keys($treated),
-            array_values($treated),
-            $this->email->content
-        );
-
-        return $bound;
+        return $this->translateBindings($this->email->content);
     }
 
     /**
@@ -111,5 +110,20 @@ class StringView implements Htmlable, View
         }
 
         return $this;
+    }
+
+    /**
+     * @param string $target
+     * @return string
+     */
+    protected function translateBindings(string $target):string
+    {
+        $treated = Bindings::normaliseKeys($this->data);
+
+        return str_replace(
+            array_keys($treated),
+            array_values($treated),
+            $target
+        );
     }
 }
