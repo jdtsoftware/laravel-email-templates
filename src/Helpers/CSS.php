@@ -1,11 +1,11 @@
 <?php
 
 namespace JDT\LaravelEmailTemplates\Helpers;
+
 use TijsVerkoyen\CssToInlineStyles\CssToInlineStyles;
 
 /**
- * Class CSS
- * @package JDT\LaravelEmailTemplates\Helpers
+ * Class CSS.
  */
 class CSS
 {

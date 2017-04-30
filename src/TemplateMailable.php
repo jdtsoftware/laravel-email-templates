@@ -3,7 +3,6 @@
 namespace JDT\LaravelEmailTemplates;
 
 use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 use JDT\LaravelEmailTemplates\Helpers\Bindings;
@@ -47,7 +46,7 @@ class TemplateMailable extends Mailable
     {
         $this->view = [
             'html' => new StringView($this->email, $this->viewData, $this->stylesheet, true),
-            'text' => new StringView($this->email, $this->viewData, $this->stylesheet)
+            'text' => new StringView($this->email, $this->viewData, $this->stylesheet),
         ];
 
         return $this->view;
