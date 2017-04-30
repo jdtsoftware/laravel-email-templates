@@ -4,9 +4,9 @@ namespace JDT\LaravelEmailTemplates;
 
 use Illuminate\Contracts\View\View;
 use Illuminate\Contracts\Support\Htmlable;
+use JDT\LaravelEmailTemplates\Helpers\CSS;
 use JDT\LaravelEmailTemplates\Helpers\Bindings;
 use JDT\LaravelEmailTemplates\Entities\EmailTemplate;
-use JDT\LaravelEmailTemplates\Helpers\CSS;
 
 /**
  * Class StringView.

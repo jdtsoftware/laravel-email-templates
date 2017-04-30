@@ -22,5 +22,5 @@ return [
     'cacheDuration' => 60,
 
     // Format for cache keys, replaced items are: handle, language, ownerId
-    'cacheKeyFormat' => 'email_template_%s_%s_%d'
+    'cacheKeyFormat' => 'email_template_%s_%s_%d',
 ];
