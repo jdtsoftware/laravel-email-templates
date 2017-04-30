@@ -24,7 +24,7 @@ class ServiceProvider extends LaravelServiceProvider
     public function boot()
     {
         $this->registerViews();
-        $this->registerConfig();
+
         $this->registerMigrations();
     }
 
@@ -70,8 +70,13 @@ class ServiceProvider extends LaravelServiceProvider
      */
     public function register()
     {
+        $this->registerConfig();
         $this->app->bind('laravel-email-templates', function ($app) {
-            return new EmailTemplates(new EmailTemplateRepository());
+            return new EmailTemplates(
+                new EmailTemplateRepository(),
+                $app->make('cache.store'),
+                \Config::get('laravel-email-templates.css_file')
+            );
         });
     }
 }

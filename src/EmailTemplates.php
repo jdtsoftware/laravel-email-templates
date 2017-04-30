@@ -2,6 +2,8 @@
 
 namespace JDT\LaravelEmailTemplates;
 
+use Illuminate\Contracts\Cache\Repository;
+
 /**
  * Class EmailTemplates.
  */
@@ -13,22 +15,39 @@ class EmailTemplates
     protected $repository;
 
     /**
-     * EmailTemplates constructor.
+     * @var Repository
      */
-    public function __construct(EmailTemplateRepository $emailTemplateRepository)
-    {
+    protected $cache;
+
+    /**
+     * @var string
+     */
+    protected $stylesheet;
+
+    /**
+     * EmailTemplates constructor.
+     * @param EmailTemplateRepository $emailTemplateRepository
+     * @param Repository $cache
+     */
+    public function __construct(
+        EmailTemplateRepository $emailTemplateRepository,
+        Repository $cache,
+        string $stylesheet = null
+    ) {
         $this->repository = $emailTemplateRepository;
+        $this->cache = $cache;
+        $this->stylesheet = $stylesheet;
     }
 
     /**
-     * @param string $template
+     * @param string $handle
      * @param array $data
      * @param string|null $language
      * @param null $ownerId
      * @return TemplateMailable
      * @throws \Exception
      */
-    public function fetch(string $template, array $data = [], string $language = null, $ownerId = null):TemplateMailable
+    public function fetch(string $handle, array $data = [], string $language = null, $ownerId = null):TemplateMailable
     {
         // If a language wasn't passed then we check if we have a default
         // language to fall back to.  If we have neither, don't continue.
@@ -42,17 +61,46 @@ class EmailTemplates
             }
         }
 
-        $entity = $this->repository->findByHandle(
-            $template,
-            $language,
-            config('laravel-email-templates.defaultLanguageFallback'),
-            $ownerId
-        );
+        $entity = null;
+        $caching = config('laravel-email-templates.cache');
+        if ($caching) {
+            $entity = $this->cache->get($this->getCacheKey($handle, $language, $ownerId));
+        }
+
+        if (empty($entity)) {
+            $entity = $this->repository->findByHandle(
+                $handle,
+                $language,
+                config('laravel-email-templates.defaultLanguageFallback'),
+                $ownerId
+            );
+        }
 
         if (empty($entity)) {
             return null;
         }
 
-        return new TemplateMailable($entity, $data);
+        if ($caching) {
+            $this->cache->put(
+                $this->getCacheKey($handle, $language, $ownerId),
+                $entity,
+                config('laravel-email-templates.cacheDuration')
+            );
+        }
+
+        return new TemplateMailable($entity, $data, $this->stylesheet);
+    }
+
+    /**
+     * Generate the cache key for the given template data.
+     *
+     * @param $handle
+     * @param $language
+     * @param $ownerId
+     * @return string
+     */
+    protected function getCacheKey($handle, $language, $ownerId)
+    {
+        return sprintf(config('laravel-email-templates.cacheKeyFormat'), $handle, $language, $ownerId);
     }
 }
