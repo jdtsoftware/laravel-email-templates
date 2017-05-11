@@ -63,8 +63,8 @@ class StringView implements Htmlable, View
             }
 
             $content = !empty($layout)
-                ? str_replace('{{content}}', $this->render(), $layout)
-                : $this->render();
+                ? str_replace('{{content}}', nl2br($this->render()), $layout)
+                : nl2br($this->render());
 
             if (!empty($this->stylesheet)) {
                 return CSS::transform($this->translateBindings($content), $this->stylesheet);

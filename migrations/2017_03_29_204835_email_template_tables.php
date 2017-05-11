@@ -15,7 +15,7 @@ class EmailTemplateTables extends Migration
     {
         Schema::create('email_layout', function (Blueprint $table) {
             $table->increments('id')->unsigned();
-            $table->string('layout');
+            $table->text('layout');
             $table->timestamps();
             $table->softDeletes();
         });
@@ -26,7 +26,7 @@ class EmailTemplateTables extends Migration
             $table->integer('layout_id')->unsigned();
             $table->string('handle', 128);
             $table->string('subject', 128);
-            $table->string('content');
+            $table->text('content');
             $table->string('language', 4)->default('en');
             $table->timestamps();
             $table->softDeletes();
