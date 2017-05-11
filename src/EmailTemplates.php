@@ -63,7 +63,7 @@ class EmailTemplates
 
         $entity = null;
         $caching = config('laravel-email-templates.cache');
-        if ($caching && false) {
+        if ($caching) {
             $entity = $this->cache->get($this->getCacheKey($handle, $language, $ownerId));
         }
 
