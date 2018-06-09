@@ -14,6 +14,16 @@
         "illuminate/mail": "^5.4.17",
         "tijsverkoyen/css-to-inline-styles": "^2.2"
     },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "JDT\\LaravelEmailTemplates\\ServiceProvider"
+            ],
+            "aliases": {
+                "EmailTemplate": "JDT\\LaravelEmailTemplates\\Facades\\EmailTemplates"
+            }
+        }
+    },
     "autoload": {
         "psr-4": {
             "JDT\\LaravelEmailTemplates\\": "src/"
